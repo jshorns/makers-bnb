@@ -3,24 +3,24 @@
 ## MVP
 
 > As a Landlord
-
+>
 > so I can put my space online
-
+>
 > I want to  be able to list my space on makersbnb
 
-
 > As a Landlord
-
+>
 > so I can explain what my space is
-
+>
 > I want to be able to add a description of a name, price to my post
 
 
 > As a User
-
+>
 > so I can use the site
-
+>
 > I want to be able to sign up as a user
+
 
 ## Database migration
 
@@ -29,7 +29,8 @@
 
 ## MVC Diagrams
 
-| Class - User                  |
+### CRC - User
+
 | Responsibilities  | Collaborators |
 | ------------- |:-------------:|
 | knows name     | space   |
@@ -37,7 +38,9 @@
 | knows username     |       |
 | authenticates    |       |
 
-| Class - Space                  |
+
+### CRC - Space
+
 | Responsibilities  | Collaborators |
 | ------------- |:-------------:|
 | knows name     |    |
