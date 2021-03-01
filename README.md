@@ -3,15 +3,23 @@
 ## MVP
 
 > As a Landlord
+
 > so I can put my space online
+
 > I want to  be able to list my space on makersbnb
 
+
 > As a Landlord
+
 > so I can explain what my space is
+
 > I want to be able to add a description of a name, price to my post
 
+
 > As a User
+
 > so I can use the site
+
 > I want to be able to sign up as a user
 
 ## Database migration
@@ -20,6 +28,22 @@
 2. Create tables with instructions saved in db/migrations
 
 ## MVC Diagrams
+
+| Class - User                  |
+| Responsibilities  | Collaborators |
+| ------------- |:-------------:|
+| knows name     | space   |
+| knows email address      |      |
+| knows username     |       |
+| authenticates    |       |
+
+| Class - Space                  |
+| Responsibilities  | Collaborators |
+| ------------- |:-------------:|
+| knows name     |    |
+| knows description      |      |
+| knows price     |       |
+| knows id of user who made it    |       |
 
 ### Index of spaces
 
