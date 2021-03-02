@@ -13,12 +13,12 @@ class User
 
   def self.create(name:, password:, email:, username:)
     if ENV['ENVIRONMENT'] == 'test'
-      connection = PG.connect(dbname: 'makers_bnb_test')
+      connection = PG.connect(dbname: 'makersbnb_test')
     else
-      connection = PG.connect(dbname: 'makers_bnb')
-    end 
-    
-    result = connection.exec("INSERT INTO users (name, password, email, username) VALUES('#{name}', '#{password}', '#{email}', '#{username}' ) RETURNING id, name, password, email, username;")  
+      connection = PG.connect(dbname: 'makersbnb')
+    end
+
+    result = connection.exec("INSERT INTO users (name, password, email, username) VALUES('#{name}', '#{password}', '#{email}', '#{username}' ) RETURNING id, name, password, email, username;")
     User.new(id: result[0]['id'], name: result[0]['name'], password: result[0]['password'], email: result[0]['email'], username: result[0]['username'])
   end
 
