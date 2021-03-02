@@ -6,6 +6,10 @@ require './lib/user.rb'
 class MakersBNB < Sinatra::Base
   enable :sessions
 
+  before do
+    @current_user = session[:user_id]
+  end
+
   get '/' do
     erb(:index)
   end
@@ -26,7 +30,7 @@ class MakersBNB < Sinatra::Base
       email: params[:email],
       username: params[:username]
     )
-    session[:user] = user
+    session[:user_id] = user.id
     redirect '/users/success'
   end
 
