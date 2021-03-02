@@ -1,4 +1,5 @@
 require 'pg'
+require_relative 'db_connection'
 
 class User
   attr_reader :name, :description, :price, :id
