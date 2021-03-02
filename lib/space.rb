@@ -1,4 +1,5 @@
 require 'pg'
+require 'db_connection'
 
 class Space
   attr_reader :name, :description, :price
@@ -11,12 +12,15 @@ class Space
 
   def self.create(name:, description:, price:, user_id:)
     if ENV['ENVIRONMENT'] == 'test'
-      connection = PG.connect(dbname: 'makersbnb_test')
+      DBConnection.setup('makersbnb_test')
+      # connection = PG.connect(dbname: 'makersbnb_test')
     else
-      connection = PG.connect(dbname: 'makersbnb')
+      DBConnection.setup('makersbnb')
+      # connection = PG.connect(dbname: 'makersbnb')
     end
 
-    result = connection.exec("INSERT INTO spaces (name, description, price, user_id) VALUES('#{name}', '#{description}', '#{price}', '#{user_id}' ) RETURNING id, name, description, price;")
+    DBConnection.query("INSERT INTO spaces (name, description, price, user_id) VALUES('#{name}', '#{description}', '#{price}', '#{user_id}' ) RETURNING id, name, description, price;")
+    # result = connection.exec("INSERT INTO spaces (name, description, price, user_id) VALUES('#{name}', '#{description}', '#{price}', '#{user_id}' ) RETURNING id, name, description, price;")
 
     end
 
