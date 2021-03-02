@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require './setup_database_connection'
 
 class MakersBNB < Sinatra::Base
 
