@@ -1,0 +1,8 @@
+<head>
+  <h1> Test Spaces Page </h1>
+</head
+<body>
+  <% @spaces.each do |space| %>
+     <li> <%= space.name %> <%= space.price %> <%= space.description %> </li>
+     <% end %>
+</body>
