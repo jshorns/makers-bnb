@@ -5,4 +5,7 @@
   <% @spaces.each do |space| %>
      <li> <%= space.name %> <%= space.price %> <%= space.description %> </li>
      <% end %>
+     <form action="/sessions/destroy" method="post">
+       <input type="submit" value="Log out"/>
+     </form>
 </body>
