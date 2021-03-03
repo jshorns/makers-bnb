@@ -1,10 +1,10 @@
-feature 'Viewing spaces' do 
-  scenario 'visiting spaces page' do 
+feature 'Viewing spaces' do
+  scenario 'visiting spaces page' do
     user = User.create(name: "landlord", password: "123", email: "email@email.com", username:"rich")
     Space.create(name: "room" , description: "ugly", price: 10, user_id: user.id)
 
     visit '/spaces'
 
-    expect(page).to have_content("room $10.00 ugly")
- end 
+    expect(page).to have_content("room\nugly\n$10.00")
+ end
 end
