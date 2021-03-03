@@ -2,9 +2,11 @@ require 'sinatra/base'
 require './setup_database_connection'
 require './lib/space.rb'
 require './lib/user.rb'
+require 'sinatra/flash'
 
 class MakersBNB < Sinatra::Base
   enable :sessions
+  register Sinatra::Flash
 
   before do
     @current_user = session[:user_id]
@@ -39,25 +41,34 @@ class MakersBNB < Sinatra::Base
       email: params[:email],
       username: params[:username]
     )
+    flash[:successful_signup] = "Welcome to Makers BnB, #{user.name}!"
     session[:user_id] = user.id
-    redirect '/users/success'
+    redirect '/spaces'
   end
 
   get '/users/success' do
     erb(:'users/success')
   end
-  
-  get '/sessions/new' do 
+
+  get '/sessions/new' do
     erb(:'sessions/new')
   end
 
-  get '/sessions/success' do 
+  get '/sessions/success' do
     erb(:'/sessions/success')
-  end 
+  end
 
-  post '/sessions/new' do 
-    redirect '/sessions/success'
-  end 
+  post '/sessions/new' do
+    user = User.authenticate(email: params[:email], password: params[:password])
+    if user
+      flash[:successful_login] = "You have successfully logged in, #{user.name}"
+      session[:user_id] = user.id
+      redirect '/spaces'
+    else
+      flash[:unsuccessful_login] = "I'm sorry, those details don't match our records"
+      redirect '/sessions/new'
+    end
+  end
 
   run! if app_file == $0
 end
