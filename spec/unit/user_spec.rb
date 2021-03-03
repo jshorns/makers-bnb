@@ -44,14 +44,23 @@ describe User do
       expect(authenticated_user).to be_a User
       expect(authenticated_user.id).to eq user.id
     end
-    it 'returns nil if unsuccessful login' do
+    it 'returns nil if given incorrect email' do
       user = User.create(
         name:     "Mr. Blobby",
         password: "noeledmunds",
         email:    "mrblobby@houseparty.co.uk",
         username: "mrblobby"
       )
-      expect(User.authenticate(email: 'sesamestreet@wrongemail.co.uk', password:'cookiemonster7878')).to be_nil
+      expect(User.authenticate(email: 'sesamestreet@wrongemail.co.uk', password:'noeledmunds')).to be_nil
+    end
+    it 'returns nil if given incorrect password' do
+      user = User.create(
+        name:     "Mr. Blobby",
+        password: "noeledmunds",
+        email:    "mrblobby@houseparty.co.uk",
+        username: "mrblobby"
+      )
+      expect(User.authenticate(email: 'mrblobby@houseparty.co.uk', password:'cookiemonster7878')).to be_nil
     end
   end
 end
