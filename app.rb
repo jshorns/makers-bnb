@@ -46,6 +46,18 @@ class MakersBNB < Sinatra::Base
   get '/users/success' do
     erb(:'users/success')
   end
+  
+  get '/sessions/new' do 
+    erb(:'sessions/new')
+  end
+
+  get '/sessions/success' do 
+    erb(:'/sessions/success')
+  end 
+
+  post '/sessions/new' do 
+    redirect '/sessions/success'
+  end 
 
   run! if app_file == $0
 end
