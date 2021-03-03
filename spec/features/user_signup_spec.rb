@@ -6,7 +6,7 @@ feature 'user sign up' do
     fill_in :email, with: "mrblobby@houseparty.co.uk"
     fill_in :password, with: "noeledmunds"
     fill_in :username, with: "mrblobby"
-    click_button "Submit"
+    click_button "Create Account"
 
     expect(page).to have_content("Welcome to Makers BnB, Mr Blobby!")
   end

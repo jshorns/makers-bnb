@@ -21,8 +21,13 @@ class MakersBNB < Sinatra::Base
     erb(:'spaces/index')
   end
 
-  get '/spaces/new' do
-    erb(:'spaces/new')
+  get '/spaces/new/:id' do
+    if @current_user
+      erb(:'spaces/new')
+    else
+    flash[:no_user] = "You must be signed to do that"
+    redirect('/')
+    end
   end
 
   post '/spaces/new' do
