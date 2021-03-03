@@ -16,15 +16,15 @@ class MakersBNB < Sinatra::Base
 
   get '/spaces' do
     @spaces = Space.all
-    erb(:spaces)
+    erb(:'spaces/index')
   end
 
   get '/spaces/new' do
-    erb(:newspace)
+    erb(:'spaces/new')
   end
 
   post '/spaces/new' do
-    Spaces.create(name: params['name'], description: params['description'], price: params['price'], user_id: session[:user_id] )
+    Space.create(name: params['name'], description: params['description'], price: params['price'], user_id: session[:user_id] )
     redirect '/spaces'
   end
 
