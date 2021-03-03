@@ -28,4 +28,30 @@ describe User do
       )
     end
   end
+
+  describe '.authenticate' do
+    it 'returns a user if login is successful' do
+      user = User.create(
+        name:     "Mr. Blobby",
+        password: "noeledmunds",
+        email:    "mrblobby@houseparty.co.uk",
+        username: "mrblobby"
+      )
+      authenticated_user = User.authenticate(
+        email:    'mrblobby@houseparty.co.uk',
+        password: 'noeledmunds'
+      )
+      expect(authenticated_user).to be_a User
+      expect(authenticated_user.id).to eq user.id
+    end
+    it 'returns nil if unsuccessful login' do
+      user = User.create(
+        name:     "Mr. Blobby",
+        password: "noeledmunds",
+        email:    "mrblobby@houseparty.co.uk",
+        username: "mrblobby"
+      )
+      expect(User.authenticate(email: 'sesamestreet@wrongemail.co.uk', password:'cookiemonster7878')).to be_nil
+    end
+  end
 end
