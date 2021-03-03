@@ -9,6 +9,5 @@ feature 'user sign up' do
     click_button "Submit"
 
     expect(page).to have_content("Welcome to Makers BnB, Mr Blobby!")
-    expect(page).to have_link("Return to Homepage", href: "/spaces")
   end
 end
