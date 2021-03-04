@@ -7,6 +7,7 @@ feature 'add space to website' do
     fill_in :price, with: "150"
     fill_in :start_date, with: "2021-03-05"
     fill_in :end_date, with: "2021-04-05"
+    click_button 'Post My Space'
 
     expect(page).to have_content "Crinkly Bottom"
 

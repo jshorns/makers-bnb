@@ -39,7 +39,8 @@ class MakersBNB < Sinatra::Base
   end
 
   post '/spaces/new' do
-    Space.create(name: params['name'], description: params['description'], price: params['price'], user_id: session[:user_id] )
+    space = Space.create(name: params['name'], description: params['description'], price: params['price'], user_id: session[:user_id] )
+    Calendar.create(space_id: space.id, start_date: params['start_date'], end_date: params['end_date'])
     redirect '/spaces'
   end
 
