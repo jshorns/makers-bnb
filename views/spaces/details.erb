@@ -11,9 +11,18 @@
         <span style="color:#006400"><%= @space.price %> per night</span>
       </div>
     </div>
+    <% if @current_user == @space.user_id %>
+    <div class="mb-3">
+      <div class="p-2 border" style="background-color:#F0FFF0;">
+        <span style="color:#006400"><a href='/spaces/<%= @space.id %>/calendar/new'><button type="button" class="btn btn-success">Add availability</button></a></span>
+      </div>
+    </div>
+    <% end %>
     <div>
     <% @space.calendar.each do |date| %>
+      <% if date.available? %>
       <p><%= date.date %> <a href='#'><button type="button" class="btn btn-success">Request to book</button></a></p>
+      <% end %>
     <% end %>
     </div>
   </div>

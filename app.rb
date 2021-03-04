@@ -38,6 +38,22 @@ class MakersBNB < Sinatra::Base
     erb(:'spaces/details')
   end
 
+  get '/spaces/:space_id/calendar/new' do
+    @space = Space.find_by_id(id: params[:space_id])
+    if @current_user == @space.user_id
+      erb(:'spaces/calendar/new')
+    else
+      flash[:not_owner] = "You must be the owner of a property to add available dates."
+      redirect("/spaces/#{@space.id}")
+    end
+  end
+
+  post '/spaces/:space_id/calendar/new' do
+    @space = Space.find_by_id(id: params[:space_id])
+    Calendar.create(space_id: @space.id, start_date: params['start_date'], end_date: params['end_date'])
+    redirect("/spaces/#{@space.id}")
+  end
+
   post '/spaces/new' do
     space = Space.create(name: params['name'], description: params['description'], price: params['price'], user_id: session[:user_id] )
     Calendar.create(space_id: space.id, start_date: params['start_date'], end_date: params['end_date'])

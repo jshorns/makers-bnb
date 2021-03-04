@@ -8,8 +8,8 @@ class Calendar
     finish = Date.parse(end_date)
     while counter <= finish
       result = DBConnection.query(
-        "INSERT INTO dates (date, space_id)
-        VALUES('#{counter.strftime("%Y-%m-%d")}', '#{space_id}')
+        "INSERT INTO dates (date, available, space_id)
+        VALUES('#{counter.strftime("%Y-%m-%d")}', 't', '#{space_id}')
         RETURNING id, date, available, space_id;")
       date = SpaceDate.new(
         id:        result[0]['id'],

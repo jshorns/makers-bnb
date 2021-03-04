@@ -59,7 +59,7 @@ class Space
     )
   end
 
-  attr_reader :id, :name, :description, :price
+  attr_reader :id, :name, :description, :price, :user_id
 
   def initialize(id:, name:, description:, price:, user_id:)
     @id = id

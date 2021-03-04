@@ -22,6 +22,7 @@ describe Calendar do
       expect(calendar.dates.first).to be_a SpaceDate
       expect(calendar.dates.first.date).to eq('2022-03-01')
       expect(calendar.dates.first.space_id).to eq space.id
+      expect(calendar.dates.first.available?).to be true
       expect(calendar.space_id).to eq space.id
     end
   end
