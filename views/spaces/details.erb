@@ -1,0 +1,23 @@
+<div class="container" style="padding-top: 100px">
+<h1 style="color:#42ba96;"><%= @space.name %></h1>
+  <div class="alert alert-success" role="alert">
+    <div class="mb-3">
+      <div class="p-2 border" style="background-color:#F0FFF0;">
+        <span style="color:#006400"><%= @space.description %></span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <div class="p-2 border" style="background-color:#F0FFF0;">
+        <span style="color:#006400"><%= @space.price %> per night</span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <a href="#">
+        <button type="button" class="btn btn-success">Request to book</button>
+      </a>
+    </div>
+    <% @space.calendar.each do |date| %>
+      <p><%= date.date %> <a href='#'>Request to book</p>
+    <% end %>
+  </div>
+</div>
