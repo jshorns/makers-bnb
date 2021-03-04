@@ -100,11 +100,13 @@ Ruby version 2.6.5
     ```bash
     psql
     ```
+
 2. Create a database 'makersbnb'
 
     ```sql
     CREATE DATABASE makersbnb;
     ```
+
 3. Connect to the database
 
     ```sql
@@ -145,7 +147,7 @@ Ruby version 2.6.5
     ```
 
 5. Create the test database
-   
+
     ```sql
     CREATE DATABASE makersbnb_test;
     ```
