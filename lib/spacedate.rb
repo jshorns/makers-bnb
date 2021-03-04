@@ -1,8 +1,8 @@
 class SpaceDate
   def self.create(date:, available: true, space_id:)
     result = DBConnection.query(
-      "INSERT INTO dates (date, available, space_id) 
-      VALUES ('#{date}', '#{available}', '#{space_id}') 
+      "INSERT INTO dates (date, available, space_id)
+      VALUES ('#{date}', '#{available}', '#{space_id}')
       RETURNING id, date, available, space_id;"
     )
     SpaceDate.new(
