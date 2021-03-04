@@ -24,7 +24,7 @@ class Space
     end
   end
 
-  def self.find(name: nil)
+  def self.find_by_name(name: nil)
     return nil unless name
 
     result = DBConnection.query("SELECT id, name, description, price, user_id FROM spaces WHERE name= '#{name}';")
@@ -44,7 +44,8 @@ class Space
     end
   end
 
-  def self.find(id: nil)
+    
+  def self.find_by_id(id: nil)
     return nil unless id
 
     result = DBConnection.query("SELECT id, name, description, price, user_id FROM spaces WHERE id= '#{id}';")
