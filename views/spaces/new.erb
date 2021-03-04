@@ -23,4 +23,27 @@
   </div>
 </div>
 
+<% @spaces.each do |space| %>
+<div class="alert alert-success" role="alert">
+  <div class="mb-3">
+    <div class="p-2 border" style="background-color:#F0FFF0;">
+      <span style="color:#006400"><%= space.name %></span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <div class="p-2 border" style="background-color:#F0FFF0;">
+      <span style="color:#006400"><%= space.description %></span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <div class="p-2 border" style="background-color:#F0FFF0;">
+      <span style="color:#006400"><%= space.price %> per night</span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <a href="/spaces/<%= space.id %>">
+      <button type="button" class="btn btn-success">Check availability</button>
+    </a>
+  </div>
+</div>
 <% end %>

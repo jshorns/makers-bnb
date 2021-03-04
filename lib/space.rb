@@ -37,7 +37,7 @@ class Space
     )
   end
 
-  def self.find(id: nil)
+  def self.find_by_id(id: nil)
     return nil unless id
 
     result = DBConnection.query("SELECT id, name, description, price, user_id FROM spaces WHERE id= '#{id}';")

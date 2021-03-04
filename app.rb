@@ -22,6 +22,7 @@ class MakersBNB < Sinatra::Base
   end
 
   get '/spaces/new/:id' do
+    #@spaces = Space.find(id: params[:space_id])
     if @current_user
       erb(:'spaces/new')
     else
