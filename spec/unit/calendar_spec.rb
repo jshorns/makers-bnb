@@ -16,7 +16,7 @@ describe Calendar do
         price: 150,
         user_id: user.id
       )
-      calendar = Calendar.create(space_id: space.id)
+      calendar = Calendar.create(space_id: space.id, start_date: '2022-03-01', end_date: '2022-03-31')
       expect(calendar).to be_a Calendar
       expect(calendar.dates).to be_a Array
       expect(calendar.dates.first).to be_a SpaceDate
@@ -39,7 +39,7 @@ describe Calendar do
         price: 150,
         user_id: user.id
       )
-      Calendar.create(space_id: space.id)
+      Calendar.create(space_id: space.id, start_date: '2022-03-01', end_date: '2022-03-31')
       calendar = Calendar.find(space_id: space.id)
       expect(calendar).to be_a Calendar
       expect(calendar.dates).to be_a Array
