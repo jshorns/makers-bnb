@@ -37,6 +37,13 @@ class Space
     )
   end
 
+  def self.find_by_user_id(id:)
+    result = DBConnection.query("SELECT * FROM spaces WHERE id= #{id};")
+    result.reverse_each.map do |space|
+      Space.new(id: space['id'], name: space['name'], description: space['description'], price: space['price'], user_id: space['user_id'])
+    end
+  end
+
   def self.find(id: nil)
     return nil unless id
 
