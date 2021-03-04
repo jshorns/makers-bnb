@@ -1,49 +1,50 @@
 <% if @current_user %>
 
-<div class="container" style="padding-top: 100px;">
- <h1 style="color:#42ba96;">Post Your Space..</h1>
- <div class="alert alert-success" role="alert">
-    <form action="/spaces/new" method="post">
-       <div class="mb-3">
-           <label for="name" class="form-label">Name</label>
-            <input type="name" class="form-control" name="name" id="name" placeholder="Lovely Penthouse" maxlength="150">
-       </div>
-       <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <input type="text" class="form-control" name="description" id="description" placeholder="..in the heart of the city." maxlength="2000">
-       </div>
-       <div class="mb-3">
-            <label for="price" class="form-label">Price Per Night £</label>
-            <input type="number" class="form-control" min="0" step="0.01" name="price" id="price" placeholder="£0.00" maxlength="20">
-       </div>
-        <div class="col-auto">
-          <button type="submit" class="btn btn-success mb-3">Post My Space</button>
+  <div class="container" style="padding-top: 100px;">
+  <h1 style="color:#42ba96;">Post Your Space..</h1>
+  <div class="alert alert-success" role="alert">
+      <form action="/spaces/new" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+              <input type="name" class="form-control" name="name" id="name" placeholder="Lovely Penthouse" maxlength="150">
         </div>
-    </form>
+        <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <input type="text" class="form-control" name="description" id="description" placeholder="..in the heart of the city." maxlength="2000">
+        </div>
+        <div class="mb-3">
+              <label for="price" class="form-label">Price Per Night £</label>
+              <input type="number" class="form-control" min="0" step="0.01" name="price" id="price" placeholder="£0.00" maxlength="20">
+        </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-success mb-3">Post My Space</button>
+          </div>
+      </form>
+    </div>
   </div>
-</div>
 
-<% @spaces.each do |space| %>
-<div class="alert alert-success" role="alert">
-  <div class="mb-3">
-    <div class="p-2 border" style="background-color:#F0FFF0;">
-      <span style="color:#006400"><%= space.name %></span>
+  <% @spaces.each do |space| %>
+  <div class="alert alert-success" role="alert">
+    <div class="mb-3">
+      <div class="p-2 border" style="background-color:#F0FFF0;">
+        <span style="color:#006400"><%= space.name %></span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <div class="p-2 border" style="background-color:#F0FFF0;">
+        <span style="color:#006400"><%= space.description %></span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <div class="p-2 border" style="background-color:#F0FFF0;">
+        <span style="color:#006400"><%= space.price %> per night</span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <a href="/spaces/<%= space.id %>">
+        <button type="button" class="btn btn-success">Check availability</button>
+      </a>
     </div>
   </div>
-  <div class="mb-3">
-    <div class="p-2 border" style="background-color:#F0FFF0;">
-      <span style="color:#006400"><%= space.description %></span>
-    </div>
-  </div>
-  <div class="mb-3">
-    <div class="p-2 border" style="background-color:#F0FFF0;">
-      <span style="color:#006400"><%= space.price %> per night</span>
-    </div>
-  </div>
-  <div class="mb-3">
-    <a href="/spaces/<%= space.id %>">
-      <button type="button" class="btn btn-success">Check availability</button>
-    </a>
-  </div>
-</div>
+  <% end %>
 <% end %>
