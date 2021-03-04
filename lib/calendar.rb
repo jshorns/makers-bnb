@@ -12,6 +12,16 @@ class Calendar
     calendar
   end
 
+  def self.find(space_id:)
+    calendar = Calendar.new(space_id: space_id)
+    result = DBConnection.query("SELECT * FROM dates WHERE space_id = '#{space_id}';")
+    result.each do |date|
+      space_date = SpaceDate.new(id: date['id'], date: date['date'], available: date['available'], space_id: date['space_id'])
+      calendar.add(space_date)
+    end
+    calendar
+  end
+
   attr_reader :dates, :space_id
 
   def initialize(space_id:)
