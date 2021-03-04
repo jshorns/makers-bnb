@@ -31,8 +31,7 @@ class MakersBNB < Sinatra::Base
   end
 
   get '/spaces/:space_id' do
-    @user = User.create(name: "test", password: "test", email: "test", username: "test")
-    @space = Space.create(name: "room" , description: "ugly", price: 10, user_id: @user.id)
+    @space = Space.find(id: params[:space_id])
     erb(:'spaces/details')
   end
 
