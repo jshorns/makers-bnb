@@ -30,6 +30,11 @@ class MakersBNB < Sinatra::Base
     end
   end
 
+  get '/spaces/:space_id' do
+    @space = Space.create(name: "room" , description: "ugly", price: 10, user_id: user.id)
+    erb(:'spaces/details')
+  end
+
   post '/spaces/new' do
     Space.create(name: params['name'], description: params['description'], price: params['price'], user_id: session[:user_id] )
     redirect '/spaces'
