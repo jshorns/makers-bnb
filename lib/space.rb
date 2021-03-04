@@ -4,6 +4,7 @@ require_relative 'calendar'
 
 class Space
   def self.create(name:, description:, price:, user_id:)
+
     result = DBConnection.query(
       "INSERT INTO spaces (name, description, price, user_id)
       VALUES('#{name}', '#{description}', '#{price}', '#{user_id}' )
