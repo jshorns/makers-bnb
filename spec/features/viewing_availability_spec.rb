@@ -5,7 +5,7 @@ feature 'date availability' do
     visit('/spaces')
     click_link('Check availability')
     expect(page).to have_content(/ugly/)
-    expect(page).to have_content('2021-03-04')
+    expect(page).to have_content('2022-03-04')
     expect(page).to have_link('Request to book', href: '#')
   end
 end

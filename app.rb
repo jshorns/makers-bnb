@@ -1,6 +1,8 @@
 require 'sinatra/base'
 require './setup_database_connection'
+require './lib/calendar.rb'
 require './lib/space.rb'
+require './lib/spacedate.rb'
 require './lib/user.rb'
 require 'sinatra/flash'
 
@@ -32,7 +34,7 @@ class MakersBNB < Sinatra::Base
   end
 
   get '/spaces/:space_id' do
-    @space = Space.find(id: params[:space_id])
+    @space = Space.find_by_id(id: params[:space_id])
     erb(:'spaces/details')
   end
 
