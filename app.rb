@@ -38,6 +38,20 @@ class MakersBNB < Sinatra::Base
     erb(:'spaces/details')
   end
 
+  get '/spaces/:space_id/requests/new/:date_id' do
+    @space = Space.find_by_id(id: params[:space_id])
+    @date = SpaceDate.find_by_id(id: params[:date_id])
+    erb(:'requests/new')
+  end
+
+  post '/spaces/:space_id/requests/new/:date_id' do
+    @space = Space.find_by_id(id: params[:space_id])
+    @date = SpaceDate.find_by_id(id: params[:date_id])
+    DBConnection.query("INSERT INTO booking_requests (confirmed, space_id, date_id, customer_id) VALUES(NULL, #{@space.id}, #{@date.id}, #{@current_user});")
+    flash[:booking_success] = "Your booking request for #{@space.name} on #{@date.date} has been made."
+    redirect('/spaces')
+  end
+
   get '/spaces/:space_id/calendar/new' do
     @space = Space.find_by_id(id: params[:space_id])
     if @current_user == @space.user_id

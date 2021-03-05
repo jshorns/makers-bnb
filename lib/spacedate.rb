@@ -13,6 +13,18 @@ class SpaceDate
     )
   end
 
+  def self.find_by_id(id:)
+    return nil unless id
+
+    result = DBConnection.query("SELECT id, date, available, space_id FROM dates WHERE id= '#{id}';")
+    SpaceDate.new(
+      id: result[0]['id'],
+      date: result[0]['date'],
+      available: result[0]['available'],
+      space_id: result[0]['space_id'],
+    )
+  end
+
   attr_reader :id, :date, :space_id
 
   def initialize(id:, date:, available:, space_id:)

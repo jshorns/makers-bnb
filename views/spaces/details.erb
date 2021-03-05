@@ -21,7 +21,7 @@
     <div>
     <% @space.calendar.each do |date| %>
       <% if date.available? %>
-      <p><%= date.date %> <a href='#'><button type="button" class="btn btn-success">Request to book</button></a></p>
+      <p><%= date.date %> <a href='/spaces/<%= @space.id %>/requests/new/<%= date.id %>'><button type="button" class="btn btn-success">Request to book</button></a></p>
       <% end %>
     <% end %>
     </div>

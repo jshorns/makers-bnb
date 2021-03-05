@@ -1,0 +1,4 @@
+You are booking <%= @space.name %> for <%= @date.date %>. Do you want to proceed?
+<form action="/spaces/<%= @space.id %>/requests/new/<%= @date.id %>" method="post">
+  <input type="submit" class="btn btn-success" value="Confirm"/>
+  </form>
