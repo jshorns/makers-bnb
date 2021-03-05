@@ -4,6 +4,7 @@ require './lib/calendar.rb'
 require './lib/space.rb'
 require './lib/spacedate.rb'
 require './lib/user.rb'
+require './lib/booking_request.rb'
 require 'sinatra/flash'
 
 class MakersBNB < Sinatra::Base
@@ -36,6 +37,20 @@ class MakersBNB < Sinatra::Base
   get '/spaces/:space_id' do
     @space = Space.find_by_id(id: params[:space_id])
     erb(:'spaces/details')
+  end
+
+  get '/spaces/:space_id/requests/new/:date_id' do
+    @space = Space.find_by_id(id: params[:space_id])
+    @date = SpaceDate.find_by_id(id: params[:date_id])
+    erb(:'requests/new')
+  end
+
+  post '/spaces/:space_id/requests/new/:date_id' do
+    @space = Space.find_by_id(id: params[:space_id])
+    @date = SpaceDate.find_by_id(id: params[:date_id])
+    BookingRequest.create(space_id: @space.id, date_id: @date.id, customer_id: @current_user, landlord_id: @space.user_id)
+    flash[:booking_success] = "Your booking request for #{@space.name} on #{@date.date} has been made."
+    redirect('/spaces')
   end
 
   get '/spaces/:space_id/calendar/new' do
@@ -114,6 +129,11 @@ class MakersBNB < Sinatra::Base
     session.clear
     flash[:logout] = "You have successfully logged out. Goodbye!"
     redirect('/')
+  end
+
+  get '/requests' do
+    @requests = BookingRequest.all_by_landlord_id(landlord_id: @current_user)
+    erb(:'requests/index')
   end
 
   run! if app_file == $0
