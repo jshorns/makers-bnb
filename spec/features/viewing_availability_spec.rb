@@ -1,11 +1,15 @@
+# frozen_string_literal: true
+
 feature 'date availability' do
   scenario 'user can view dates that a space is available' do
     user = signup_and_signin
-    space = Space.create(name: "room" , description: "ugly", price: 10, user_id: user.id)
-    Calendar.create(space_id: space.id, start_date: '2022-03-01', end_date: '2022-03-31')
+    space = create_test_space_1(user)
+    create_test_calendar(space)
+
     visit('/spaces')
     click_link('Check availability')
-    expect(page).to have_content(/ugly/)
+
+    expect(page).to have_content(/6 Bedroom Penthouse/)
     expect(page).to have_content('2022-03-04')
     expect(page).to have_link('Request to book', href: '#')
   end

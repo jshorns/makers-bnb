@@ -1,77 +1,60 @@
+# frozen_string_literal: true
+
 require 'user'
 require 'bcrypt'
 
 describe User do
-
   describe '.create' do
     it 'creates a new user instance' do
-      user = User.create(
-        name:     "Mr. Blobby",
-        password: "noeledmunds",
-        email:    "mrblobby@houseparty.co.uk",
-        username: "mrblobby"
-      )
+      user = create_test_user_1
 
       expect(user).to be_a User
-      expect(user.name).to eq "Mr. Blobby"
-      expect(user.email).to eq "mrblobby@houseparty.co.uk"
-      expect(user.username).to eq("mrblobby")
+      expect(user.name).to eq 'Mr. Blobby'
+      expect(user.email).to eq 'mrblobby@houseparty.co.uk'
+      expect(user.username).to eq('mrblobby')
     end
 
     it 'hashes the password using Bcrypt' do
-      expect(BCrypt::Password).to receive(:create).with("noeledmunds")
-      User.create(
-        name:     "Mr. Blobby",
-        password: "noeledmunds",
-        email:    "mrblobby@houseparty.co.uk",
-        username: "mrblobby"
-      )
+      expect(BCrypt::Password).to receive(:create).with('noeledmunds')
+
+      create_test_user_1
     end
   end
 
   describe '.authenticate' do
     it 'returns a user if login is successful' do
-      user = User.create(
-        name:     "Mr. Blobby",
-        password: "noeledmunds",
-        email:    "mrblobby@houseparty.co.uk",
-        username: "mrblobby"
-      )
+      user = create_test_user_1
       authenticated_user = User.authenticate(
-        email:    'mrblobby@houseparty.co.uk',
+        email: 'mrblobby@houseparty.co.uk',
         password: 'noeledmunds'
       )
+
       expect(authenticated_user).to be_a User
       expect(authenticated_user.id).to eq user.id
     end
+
     it 'returns nil if given incorrect email' do
-      user = User.create(
-        name:     "Mr. Blobby",
-        password: "noeledmunds",
-        email:    "mrblobby@houseparty.co.uk",
-        username: "mrblobby"
-      )
-      expect(User.authenticate(email: 'sesamestreet@wrongemail.co.uk', password:'noeledmunds')).to be_nil
+      create_test_user_1
+
+      expect(User.authenticate(
+        email: 'sesamestreet@wrongemail.co.uk',
+        password: 'noeledmunds'
+      )).to be_nil
     end
+
     it 'returns nil if given incorrect password' do
-      user = User.create(
-        name:     "Mr. Blobby",
-        password: "noeledmunds",
-        email:    "mrblobby@houseparty.co.uk",
-        username: "mrblobby"
-      )
-      expect(User.authenticate(email: 'mrblobby@houseparty.co.uk', password:'cookiemonster7878')).to be_nil
+      create_test_user_1
+
+      expect(User.authenticate(
+        email: 'mrblobby@houseparty.co.uk',
+        password: 'cookiemonster7878'
+      )).to be_nil
     end
   end
 
-  describe '.find' do 
-    it 'finds a user by ID' do 
-      user = User.create(
-        name:     "Mr. Blobby",
-        password: "noeledmunds",
-        email:    "mrblobby@houseparty.co.uk",
-        username: "mrblobby"
-      )
+  describe '.find' do
+    it 'finds a user by ID' do
+      user = create_test_user_1
       result = User.find(id: user.id)
 
       expect(result.id).to eq user.id
@@ -84,5 +67,4 @@ describe User do
       expect(User.find(id: nil)).to eq nil
     end
   end
-
 end

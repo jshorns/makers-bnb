@@ -1,22 +1,15 @@
+# frozen_string_literal: true
+
 require './lib/calendar'
 require './lib/spacedate'
 
 describe Calendar do
   describe '.create' do
     it 'returns a Calendar object for the space with March dates' do
-      user = User.create(
-        name: "landlord",
-        password: "123",
-        email: "email@email.com",
-        username:"rich"
-      )
-      space = Space.create(
-        name: '6 Bedroom Penthouse',
-        description: 'In the heart of London',
-        price: 150,
-        user_id: user.id
-      )
-      calendar = Calendar.create(space_id: space.id, start_date: '2022-03-01', end_date: '2022-03-31')
+      user = create_test_user_1
+      space = create_test_space_1(user)
+      calendar = create_test_calendar(space)
+
       expect(calendar).to be_a Calendar
       expect(calendar.dates).to be_a Array
       expect(calendar.dates.first).to be_a SpaceDate
@@ -28,20 +21,11 @@ describe Calendar do
   end
   describe '.find' do
     it 'returns a Calendar object for the given space' do
-      user = User.create(
-        name: "landlord",
-        password: "123",
-        email: "email@email.com",
-        username:"rich"
-      )
-      space = Space.create(
-        name: '6 Bedroom Penthouse',
-        description: 'In the heart of London',
-        price: 150,
-        user_id: user.id
-      )
-      Calendar.create(space_id: space.id, start_date: '2022-03-01', end_date: '2022-03-31')
+      user = create_test_user_1
+      space = create_test_space_1(user)
+      create_test_calendar(space)
       calendar = Calendar.find(space_id: space.id)
+
       expect(calendar).to be_a Calendar
       expect(calendar.dates).to be_a Array
       expect(calendar.dates.first).to be_a SpaceDate

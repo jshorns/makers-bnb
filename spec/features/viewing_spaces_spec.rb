@@ -1,10 +1,14 @@
+# frozen_string_literal: true
+
 feature 'Viewing spaces' do
   scenario 'visiting spaces page' do
-    user = User.create(name: "landlord", password: "123", email: "email@email.com", username:"rich")
-    Space.create(name: "room" , description: "ugly", price: 10, user_id: user.id)
+    user = create_test_user_1
+    create_test_space_1(user)
 
     visit '/spaces'
 
-    expect(page).to have_content("room\nugly\n$10.00")
- end
+    expect(page).to have_content(
+      "6 Bedroom Penthouse\nIn the heart of London\n$150.00"
+    )
+  end
 end
