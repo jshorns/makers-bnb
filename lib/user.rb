@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'pg'
 require_relative 'db_connection'
 require 'bcrypt'
@@ -24,7 +26,9 @@ class User
   def self.authenticate(email:, password:)
     result = DBConnection.query("SELECT * FROM users WHERE email = '#{email}'")
     return unless result.any?
+
     return unless BCrypt::Password.new(result[0]['password']) == password
+    
     User.new(
       id:       result[0]['id'],
       email:    result[0]['email'],
@@ -36,7 +40,7 @@ class User
 
   def self.find(id: nil)
     return nil unless id
-    
+
     result = DBConnection.query("SELECT id, name, username, email FROM users WHERE id= #{id};")
     User.new(
       id:       result[0]['id'],
