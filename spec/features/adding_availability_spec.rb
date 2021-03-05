@@ -19,7 +19,7 @@ feature 'availability' do
     user = signup_and_signin
     space = create_test_space_1(user)
     create_test_calendar(space)
-    sign_out
+    signout
     user2 = signup_and_signin2
     visit('/spaces')
     click_link('View availability')
