@@ -162,6 +162,10 @@ Ruby version 2.6.5
 
 <div style="text-align: right"><a href="#makers-bnb">Back to top</a></div>
 
+## Team Goals
+
+[insert here]
+
 ## Specification
 
 ### Headline specifications
@@ -181,8 +185,8 @@ Ruby version 2.6.5
   * They sign up
   * They create a space
   * They update a space
-  A user requests to book their space
-  * hey confirm a request
+  * A user requests to book their space
+  * They confirm a request
   * They request to book a space
   * Their request to book a space is confirmed
   * Their request to book a space is denied
