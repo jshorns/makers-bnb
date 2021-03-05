@@ -37,6 +37,11 @@
           <li class="nav-item">
             <a class="nav-link" href="/requests"><b>My Requests</b></a>
           </li>
+          <% if @current_user %>
+          <li class="nav-item">
+            Logged in as <%= User.find(id: @current_user).name %>
+          </li>
+          <% end %>
         </ul>
       </div>
     <% if @current_user %>
