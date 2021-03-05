@@ -28,7 +28,7 @@ class User
     return unless result.any?
 
     return unless BCrypt::Password.new(result[0]['password']) == password
-    
+
     User.new(
       id:       result[0]['id'],
       email:    result[0]['email'],
@@ -49,6 +49,16 @@ class User
       password: result[0]['password'],
       username: result[0]['username']
     )
+  end
+
+  def self.find_user_by_email(email: nil)
+
+    p email
+    result = DBConnection.query("SELECT id, name, username, email FROM users WHERE email= '#{email}';")
+    p result[0]
+    return :success if result[0] == nil
+
+
   end
 
   attr_reader :name, :email, :username, :id
