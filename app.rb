@@ -67,7 +67,7 @@ class MakersBNB < Sinatra::Base
   post '/users/new' do
     email_check = User.find_user_by_email(email: params[:email])
     if email_check == :success
-    user = User.create(
+      user = User.create(
         name:     params[:name],
         password: params[:password],
         email:    params[:email],

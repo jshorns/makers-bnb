@@ -52,12 +52,13 @@ class User
   end
 
   def self.find_user_by_email(email: nil)
-
-    p email
-    result = DBConnection.query("SELECT id, name, username, email FROM users WHERE email= '#{email}';")
-    p result[0]
-    return :success if result[0] == nil
-
+    result = DBConnection.query(
+      "SELECT EXISTS(
+        SELECT id, name, username, email 
+        FROM users 
+        WHERE email= '#{email}');
+      ")
+    return :success if result[0]['exists'] == 'f'
 
   end
 
