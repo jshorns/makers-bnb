@@ -8,24 +8,33 @@
       <% @requests.each do |request| %>
       <div class="mb-3">
         <div class="p-2 border" style="background-color:#F0FFF0;">
-          <span style="color:#006400">Request for <%= request.space_id %></span>
+          <span style="color:#006400">Request for <%= Space.find_by_id(id: request.space_id).name %></span>
         </div>
       </div>
       <div class="mb-3">
         <div class="p-2 border" style="background-color:#F0FFF0;">
-          <span style="color:#006400">For <%= request.date_id %></span>
+          <span style="color:#006400">For <%= SpaceDate.find_by_id(id: request.date_id).date %></span>
         </div>
       </div>
       <div class="mb-3">
         <div class="p-2 border" style="background-color:#F0FFF0;">
-          <span style="color:#006400">From <%= request.customer_id %></span>
+          <span style="color:#006400">From <%= User.find(id: request.customer_id).name %></span>
         </div>
       </div>
+      <form method='post'>
       <div class="mb-3">
         <a href="#">
-          <button type="button" class="btn btn-success">Approve Request</button>
+          <button type="button" class="btn btn-success">Approve</button>
         </a>
     </div>
+    </form>
+    <form>
+    <div class="mb-3">
+      <a href="#">
+        <button type="button" class="btn btn-danger">Reject</button>
+      </a>
+    </div>
+    </form>
   </div>
 </div>
 </body>

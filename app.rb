@@ -48,7 +48,7 @@ class MakersBNB < Sinatra::Base
   post '/spaces/:space_id/requests/new/:date_id' do
     @space = Space.find_by_id(id: params[:space_id])
     @date = SpaceDate.find_by_id(id: params[:date_id])
-    Request.create(space_id: @space.id, date_id: @date.id, customer_id: @current_user, landlord_id: @space.user_id)
+    BookingRequest.create(space_id: @space.id, date_id: @date.id, customer_id: @current_user, landlord_id: @space.user_id)
     flash[:booking_success] = "Your booking request for #{@space.name} on #{@date.date} has been made."
     redirect('/spaces')
   end
@@ -122,7 +122,7 @@ class MakersBNB < Sinatra::Base
   end
 
   get '/requests' do
-    @requests = Request.all_by_landlord_id(landlord_id: @current_user)
+    @requests = BookingRequest.all_by_landlord_id(landlord_id: @current_user)
     erb(:'requests/index')
   end
 

@@ -17,9 +17,10 @@ feature 'booking a space' do
     fill_in(:password, with: 'noeledmunds')
     click_button('Log in')
     click_link('My Requests')
-    p Request.all_by_landlord_id(landlord_id: user.id)
-    expect(page).to have_content('Request for 6 Bedroom Penthouse for 2022-03-01 from Mr. Blobber')
-    expect(page).to have_link('Confirm')
+    expect(page).to have_content('Request for 6 Bedroom Penthouse')
+    expect(page).to have_content('For 2022-03-01')
+    expect(page).to have_content('From Mr. Blobber')
+    expect(page).to have_content('Approve')
     expect(page).to have_link('Reject')
   end
 end
