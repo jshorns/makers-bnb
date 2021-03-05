@@ -1,0 +1,3 @@
+describe BookingRequest do
+  
+end
