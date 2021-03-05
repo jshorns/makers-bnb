@@ -73,7 +73,7 @@ describe User do
       user = create_test_user_1
       result = User.checking_email(email: user.email)
 
-      expect(result).to be nil
+      expect(result).to eq :failure
     end
   end
 end
