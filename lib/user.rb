@@ -28,7 +28,7 @@ class User
     return unless result.any?
 
     return unless BCrypt::Password.new(result[0]['password']) == password
-    
+
     User.new(
       id:       result[0]['id'],
       email:    result[0]['email'],
@@ -49,6 +49,28 @@ class User
       password: result[0]['password'],
       username: result[0]['username']
     )
+  end
+
+  def self.checking_email(email: nil)
+    result = DBConnection.query(
+      "SELECT EXISTS(
+        SELECT id, name, username, email
+        FROM users
+        WHERE email= '#{email}');
+      ")
+    return :failure if result[0]['exists'] == 't'
+
+  end
+
+  def self.checking_username(username: nil)
+    result = DBConnection.query(
+      "SELECT EXISTS(
+        SELECT id, name, username, email
+        FROM users
+        WHERE username= '#{username}');
+      ")
+    return :failure if result[0]['exists'] == 't'
+
   end
 
   attr_reader :name, :email, :username, :id

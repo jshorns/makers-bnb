@@ -61,6 +61,16 @@ def create_test_calendar(test_space)
   )
 end
 
+def sign_up
+  visit '/'
+  click_link 'Sign Up'
+  fill_in :name, with: 'Mr Blobby'
+  fill_in :email, with: 'mrblobby@houseparty.co.uk'
+  fill_in :password, with: 'noeledmunds'
+  fill_in :username, with: 'mrblobby'
+  click_button 'Create Account'
+end
+
 def signup_and_signin
   user = create_test_user_1
   visit '/sessions/new'

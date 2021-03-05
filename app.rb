@@ -28,7 +28,7 @@ class MakersBNB < Sinatra::Base
     if @current_user
       erb(:'spaces/new')
     else
-    flash[:no_user] = "You must be signed to do that"
+    flash[:no_user] = "You must be signed in to do that"
     redirect('/')
     end
   end
@@ -65,15 +65,25 @@ class MakersBNB < Sinatra::Base
   end
 
   post '/users/new' do
-    user = User.create(
-      name:     params[:name],
-      password: params[:password],
-      email:    params[:email],
-      username: params[:username]
-    )
-    flash[:successful_signup] = "Welcome to Makers BnB, #{user.name}!"
-    session[:user_id] = user.id
-    redirect '/spaces'
+    email_check = User.checking_email(email: params[:email])
+    user_name = User.checking_username(username: params[:username])
+    if email_check == :failure
+      flash[:duplicate_email] = 'Sorry, that email address is already being used.'
+      redirect '/users/new'
+    elsif user_name == :failure
+      flash[:duplicate_username] = 'Sorry, that username is already being used.'
+      redirect '/users/new'
+    else
+      user = User.create(
+        name:     params[:name],
+        password: params[:password],
+        email:    params[:email],
+        username: params[:username]
+      )
+      flash[:successful_signup] = "Welcome to Makers BnB, #{user.name}!"
+      session[:user_id] = user.id
+      redirect '/spaces'
+    end
   end
 
   get '/users/success' do

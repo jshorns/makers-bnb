@@ -67,4 +67,13 @@ describe User do
       expect(User.find(id: nil)).to eq nil
     end
   end
+
+  describe '.find_user_by_email' do
+    it 'finds a user by email' do
+      user = create_test_user_1
+      result = User.checking_email(email: user.email)
+
+      expect(result).to be nil
+    end
+  end
 end
