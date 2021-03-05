@@ -1,6 +1,5 @@
 require 'pg'
 require_relative 'db_connection'
-require_relative 'date'
 
 class Request
   def self.create(confirmed:, space_id:, date_id:, customer_id:, landlord_id:)
@@ -26,8 +25,7 @@ class Request
     result.reverse_each.map do |request|
       Request.new(id: request['id'], confirmed: request['confirmed'],
          space_id: request['space_id'], date_id: request['date_id'],
-         customer_id: request['customer_id'], request['landlord_id']
-       )
+         customer_id: request['customer_id'], landlord_id: request['landlord_id'])
     end
   end
 
