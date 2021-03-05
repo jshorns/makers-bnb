@@ -3,7 +3,6 @@
 feature 'add space to website' do
   scenario 'user can add a space' do
     signup_and_signin
-    save_and_open_page
     click_link 'My Spaces'
     fill_in :name, with: 'Crinkly Bottom'
     fill_in :description, with: 'Large house in leafy England, space to entertain many guests, one annoying resident'

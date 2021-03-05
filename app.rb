@@ -4,6 +4,7 @@ require './lib/calendar.rb'
 require './lib/space.rb'
 require './lib/spacedate.rb'
 require './lib/user.rb'
+require './lib/booking_requests.rb'
 require 'sinatra/flash'
 
 class MakersBNB < Sinatra::Base
@@ -47,7 +48,6 @@ class MakersBNB < Sinatra::Base
   post '/spaces/:space_id/requests/new/:date_id' do
     @space = Space.find_by_id(id: params[:space_id])
     @date = SpaceDate.find_by_id(id: params[:date_id])
-    DBConnection.query("INSERT INTO booking_requests (confirmed, space_id, date_id, customer_id) VALUES(NULL, #{@space.id}, #{@date.id}, #{@current_user});")
     flash[:booking_success] = "Your booking request for #{@space.name} on #{@date.date} has been made."
     redirect('/spaces')
   end
@@ -118,6 +118,11 @@ class MakersBNB < Sinatra::Base
     session.clear
     flash[:logout] = "You have successfully logged out. Goodbye!"
     redirect('/')
+  end
+
+  get '/requests' do
+    @requests = Request.all_by_landlord_id(landlord_id: @current_user)
+    erb(:'requests/index')
   end
 
   run! if app_file == $0

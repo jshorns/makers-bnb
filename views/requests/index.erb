@@ -1,0 +1,32 @@
+<body>
+
+<!-- will search through the requests database table and return 'Request for 'name' for 'date' from 'customer_id_username'-->
+
+<div class="container" style="padding-top: 100px;">
+  <h1 style="color:#42ba96;">Post Your Space..</h1>
+  <div class="alert alert-success" role="alert">
+      <% @requests.each do |request| %>
+      <div class="mb-3">
+        <div class="p-2 border" style="background-color:#F0FFF0;">
+          <span style="color:#006400">Request for <%= request.space_id %></span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="p-2 border" style="background-color:#F0FFF0;">
+          <span style="color:#006400">For <%= request.date_id %></span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="p-2 border" style="background-color:#F0FFF0;">
+          <span style="color:#006400">From <%= request.customer_id %></span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <a href="#">
+          <button type="button" class="btn btn-success">Approve Request</button>
+        </a>
+    </div>
+  </div>
+</div>
+
+</body>
