@@ -13,7 +13,7 @@ feature 'add space to website' do
 
     expect(page).to have_content 'Crinkly Bottom'
 
-    click_link 'Check availability'
+    click_link 'View availability'
 
     expect(page).to have_content '2021-03-05'
     expect(page).not_to have_content '2021-05-05'

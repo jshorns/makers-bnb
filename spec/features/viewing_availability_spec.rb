@@ -7,7 +7,7 @@ feature 'date availability' do
     create_test_calendar(space)
 
     visit('/spaces')
-    click_link('Check availability')
+    click_link('View availability')
 
     expect(page).to have_content(/6 Bedroom Penthouse/)
     expect(page).to have_content('2022-03-04')

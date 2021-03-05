@@ -69,3 +69,16 @@ def signup_and_signin
   click_button('Log in')
   user
 end
+
+def signup_and_signin2
+  user2 = create_test_user_2
+  visit '/sessions/new'
+  fill_in(:email, with: 'mrblobber@houseparty.co.uk')
+  fill_in(:password, with: 'weakpassword')
+  click_button('Log in')
+  user2
+end
+
+def sign_out
+  click_button 'Log Out'
+end
