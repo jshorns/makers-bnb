@@ -29,6 +29,15 @@ class BookingRequest
     end
   end
 
+  def self.all_by_customer_id(customer_id:)
+    result = DBConnection.query("SELECT * FROM booking_requests WHERE customer_id = #{customer_id}")
+    result.reverse_each.map do |request|
+      BookingRequest.new(id: request['id'], confirmed: request['confirmed'],
+         space_id: request['space_id'], date_id: request['date_id'],
+         customer_id: request['customer_id'], landlord_id: request['landlord_id'])
+    end
+  end
+
   attr_reader :id ,:confirmed ,:space_id ,:date_id ,:customer_id, :landlord_id
 
   def initialize(id:, confirmed:, space_id:, date_id:, customer_id:, landlord_id:)

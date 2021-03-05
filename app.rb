@@ -133,6 +133,7 @@ class MakersBNB < Sinatra::Base
 
   get '/requests' do
     @requests = BookingRequest.all_by_landlord_id(landlord_id: @current_user)
+    @customer_requests = BookingRequest.all_by_customer_id(customer_id: @current_user)
     erb(:'requests/index')
   end
 
